@@ -18,8 +18,11 @@ const config = {
     rules: [
       {
         test: /\.(ts|tsx)$/i,
-        loader: "ts-loader",
         exclude: ["/node_modules/"],
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env"],
+        },
       },
       {
         test: /\.css$/i,

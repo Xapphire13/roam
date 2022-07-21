@@ -1,22 +1,9 @@
-import THREE from "three";
+import * as THREE from "three";
 
 const width = window.innerWidth;
 const height = window.innerHeight;
 const scene = new THREE.Scene();
-// const camera = new THREE.OrthographicCamera(
-//   width / -2,
-//   width / 2,
-//   height / 2,
-//   height / -2,
-//   1,
-//   1000
-// );
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
+const camera = new THREE.OrthographicCamera(-20, 20, -20, 20, 1, 100);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
