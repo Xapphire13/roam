@@ -1,0 +1,26 @@
+{
+  "name": "roam",
+  "private": true,
+  "version": "0.0.0",
+  "description": "wip isometric game",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xapphire13/roam.git"
+  },
+  "author": "xapphire13",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xapphire13/roam/issues"
+  },
+  "homepage": "https://github.com/Xapphire13/roam#readme",
+  "dependencies": {
+    "three": "^0.142.0"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^2.5.0",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
