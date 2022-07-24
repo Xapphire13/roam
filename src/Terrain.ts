@@ -1,4 +1,5 @@
 import {
+  BackSide,
   BoxGeometry,
   EdgesGeometry,
   LineBasicMaterial,
@@ -13,6 +14,7 @@ import {
 export const TerrainTypes = {
   none: 0,
   grass: 1,
+  water: 2,
 } as const;
 
 export type TerrainType = typeof TerrainTypes[keyof typeof TerrainTypes];
@@ -52,7 +54,9 @@ export default class Terrain {
   private getMaterial() {
     switch (this.type) {
       case TerrainTypes.grass:
-        return new MeshStandardMaterial({ color: 0x00ff00 });
+        return new MeshStandardMaterial({ color: 0x00ff44, side: BackSide });
+      case TerrainTypes.water:
+        return new MeshStandardMaterial({ color: 0x00aaff, side: BackSide });
       default:
         return undefined;
     }

@@ -23,6 +23,25 @@ function createTestChunk() {
     }
   }
 
+  // Add some water
+  chunk[y][128][128] = 2;
+  chunk[y][128][129] = 2;
+  chunk[y][128][130] = 2;
+  chunk[y][128][131] = 2;
+  chunk[y][129][128] = 2;
+  chunk[y][129][129] = 2;
+  chunk[y][129][130] = 2;
+  chunk[y][129][131] = 2;
+  chunk[y][130][128] = 2;
+  chunk[y][130][129] = 2;
+  chunk[y][130][130] = 2;
+  chunk[y][130][131] = 2;
+
+  // Some raised ground
+  chunk[y + 1][135][128] = 1;
+  chunk[y + 1][135][129] = 1;
+  chunk[y + 1][135][130] = 1;
+
   return chunk;
 }
 

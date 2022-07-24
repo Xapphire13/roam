@@ -31,12 +31,12 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(WIDTH, HEIGHT);
 document.body.appendChild(renderer.domElement);
 
-const axesHelper = new THREE.AxesHelper(5);
-axesHelper.position.set(128, 128, 128);
-scene.add(axesHelper);
-
-const ambientLight = new THREE.AmbientLight(0xffffff);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+directionalLight.position.set(1, -1, -1);
+scene.add(directionalLight);
 
 camera.position.set(-DISTANCE, DISTANCE, -DISTANCE);
 camera.lookAt(scene.position);
