@@ -10,14 +10,7 @@ import {
   Scene,
   Vector3,
 } from "three";
-
-export const TerrainTypes = {
-  none: 0,
-  grass: 1,
-  water: 2,
-} as const;
-
-export type TerrainType = typeof TerrainTypes[keyof typeof TerrainTypes];
+import { TerrainType, TerrainTypes } from "./server/Terrain";
 
 const geometry = new BoxGeometry(1, 1, 1);
 

@@ -1,7 +1,7 @@
 import "modern-normalize";
 import * as THREE from "three";
-import Terrain, { TerrainTypes } from "./Terrain";
-import TEST_CHUNK from "./TestChunk";
+import { TerrainType, TerrainTypes } from "./server/Terrain";
+import Terrain from "./Terrain";
 
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
@@ -41,22 +41,31 @@ scene.add(directionalLight);
 camera.position.set(-DISTANCE, DISTANCE, -DISTANCE);
 camera.lookAt(scene.position);
 camera.rotateZ(Math.PI);
-positionCamera(128, 128, 128);
+positionCamera(32, 32, 32);
 
-const chunk = TEST_CHUNK;
-const blocks: Terrain[] = [];
+async function loadEnvironment() {
+  const chunk: TerrainType[][][] = (
+    await (
+      await fetch(
+        "https://xapphire13-roam-p5j4jrxhwx4-3000.githubpreview.dev/chunks",
+        { credentials: "include" }
+      )
+    ).json()
+  ).chunks[0];
+  const blocks: Terrain[] = [];
 
-chunk.forEach((level, y) => {
-  level.forEach((row, x) => {
-    row.forEach((block, z) => {
-      if (block !== TerrainTypes.none) {
-        blocks.push(new Terrain(block, new THREE.Vector3(x, y, z)));
-      }
+  chunk.forEach((level, y) => {
+    level.forEach((row, x) => {
+      row.forEach((block, z) => {
+        if (block !== TerrainTypes.none) {
+          blocks.push(new Terrain(block, new THREE.Vector3(x, y, z)));
+        }
+      });
     });
   });
-});
 
-blocks.forEach((block) => block.addToScene(scene));
+  blocks.forEach((block) => block.addToScene(scene));
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -65,3 +74,4 @@ function animate() {
 }
 
 animate();
+loadEnvironment();
