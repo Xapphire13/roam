@@ -1,5 +1,6 @@
 import "modern-normalize";
 import * as THREE from "three";
+import deserializeMessage from "./server/deserializeMessage";
 import { TerrainType, TerrainTypes } from "./server/Terrain";
 import Terrain from "./Terrain";
 
@@ -75,3 +76,20 @@ function animate() {
 
 animate();
 loadEnvironment();
+
+const socket = new WebSocket(
+  "wss://xapphire13-roam-p5j4jrxhwx4-3000.githubpreview.dev"
+);
+
+socket.addEventListener("open", () => {});
+
+socket.addEventListener("message", (event) => {
+  async function processEvent() {
+    console.log(
+      "Message from server",
+      deserializeMessage(await (event.data as Blob))
+    );
+  }
+
+  processEvent();
+});
