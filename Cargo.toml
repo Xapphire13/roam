@@ -1,0 +1,30 @@
+[package]
+name = "roam"
+version = "0.1.0"
+edition = "2024"
+description = "An isometric RTS/RPG built with Bevy"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+bevy = "0.20"
+
+# Bevy's dependency tree pulls in `getrandom`, which needs its JS backend
+# enabled when targeting the browser.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.4", features = ["wasm_js"] }
+
+# Compile dependencies with optimizations even in dev builds; Bevy is very
+# slow otherwise. Our own crate stays lightly optimized for fast rebuilds.
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+# Smaller, faster builds for shipping to the web.
+[profile.release]
+codegen-units = 1
+lto = "thin"
+opt-level = "s"
+strip = "debuginfo"
